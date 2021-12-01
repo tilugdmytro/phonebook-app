@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: MintCream;
 }
 
 code {
@@ -12,12 +13,12 @@ code {
     monospace;
 }
 
-.container {
+/* .container {
   width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: MintCream;
-}
+} */
 
 ul,
 li {

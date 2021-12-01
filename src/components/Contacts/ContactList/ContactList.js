@@ -3,10 +3,10 @@ import { useEffect } from "react";
 import {
   deleteContact,
   fetchContacts,
-} from "../../../redux/contacts-operations";
+} from "../../../redux/contacts/contacts-operations";
 import Contact from "../Contact/Contact";
 import s from "./ContactList.module.css";
-import { getVisibleContacts } from "../../../redux/selectors";
+import { getVisibleContacts } from "../../../redux/contacts/contacts-selectors";
 
 function ContactList() {
   const contacts = useSelector(getVisibleContacts);

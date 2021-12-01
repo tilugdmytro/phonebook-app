@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import contactsReducer from "./contacts-reducer";
+import contactsReducer from "./contacts/contacts-reducer";
+import authReducer from "./auth/auth-slice";
 // import logger from "redux-logger";
 import {
-  // persistStore,
-  // persistReducer,
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,16 +12,19 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 
-// const contactsPersistConfig = {
-//   key: "contacts",
-//   storage,
-//   blacklist: ["filter"],
-// };
+const authPersistConfig = {
+  key: "auth",
+  storage,
+  whitelist: ["token"],
+};
 
 export const store = configureStore({
-  reducer: { contacts: contactsReducer },
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: contactsReducer,
+  },
   // official fix of non-serializable data ===
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -31,9 +35,4 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV === "development",
 });
 
-// const persistor = persistStore(store);
-
-// eslint-disable-next-line import/no-anonymous-default-export
-// export default { store };
-
-// export default { store, persistor };
+export const persistor = persistStore(store);
