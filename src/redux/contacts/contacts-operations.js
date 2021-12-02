@@ -11,20 +11,52 @@ export const addContact = createAsyncThunk(
   }
 );
 
+const removeContact = (id) => {
+  return axios.delete(`/contacts/${id}`);
+};
+
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
-  async (contactId) => {
-    const {
-      data: { id },
-    } = await axios.delete(`./contacts/${contactId}`);
-    return id;
+  async (id, { rejectWithValue }) => {
+    try {
+      await removeContact(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
+// export const deleteContact = createAsyncThunk(
+//   "contacts/deleteContact",
+//   async (contactId) => {
+//     const {
+//       data: { id },
+//     } = await axios.delete(`./contacts/${contactId}`);
+//     return id;
+//   }
+// );
+
+const getContacts = () => {
+  return axios.get("/contacts").then(({ data }) => data);
+};
+
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchContacts",
-  async () => {
-    const { data } = await axios.get("/contacts");
-    return data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const contacts = await getContacts();
+      return contacts;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
+
+// export const fetchContacts = createAsyncThunk(
+//   "contacts/fetchContacts",
+//   async () => {
+//     const { data } = await axios.get("/contacts");
+//     return data;
+//   }
+// );
