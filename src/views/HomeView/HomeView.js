@@ -1,28 +1,21 @@
 import React from "react";
-
-const styles = {
-  container: {
-    minHeight: "calc(100vh - 50px)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: "center",
-  },
-};
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 const HomeView = () => (
-  <div style={styles.container}>
-    <h1 style={styles.title}>
-      Приветственная страница нашего сервиса{" "}
-      <span role="img" aria-label="Иконка приветствия">
-        💁‍♀️
-      </span>
-    </h1>
-  </div>
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "row",
+    }}
+  >
+    <Container component="main" sx={{ mt: 12, mb: 2 }} maxWidth="sm">
+      <Typography variant="h1" component="h1">
+        Welcome to Phonebook!
+      </Typography>
+    </Container>
+  </Box>
 );
 
 export default HomeView;
