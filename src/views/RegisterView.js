@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/auth-operations";
+import { register } from "../redux/auth/auth-operations";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-export default function LoginView() {
+export default function RegisterView() {
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
+      case "name":
+        return setName(value);
       case "email":
         return setEmail(value);
       case "password":
@@ -25,7 +28,8 @@ export default function LoginView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(logIn({ email, password }));
+    dispatch(register({ name, email, password }));
+    setName("");
     setEmail("");
     setPassword("");
   };
@@ -51,7 +55,7 @@ export default function LoginView() {
         }}
       >
         <Typography component="h2" variant="h5">
-          LOG IN PAGE
+          SIGN UP PAGE
         </Typography>
         <Box
           component="form"
@@ -71,6 +75,17 @@ export default function LoginView() {
             required
             fullWidth
             autoFocus
+            label="Name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             label="Email"
             type="email"
             name="email"
@@ -88,6 +103,7 @@ export default function LoginView() {
             value={password}
             onChange={handleChange}
           />
+
           <Button
             type="submit"
             variant="contained"
@@ -99,7 +115,7 @@ export default function LoginView() {
               mb: 2,
             }}
           >
-            Log in
+            Sign up
           </Button>
         </Box>
       </Box>

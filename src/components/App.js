@@ -1,11 +1,7 @@
 import { useEffect, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import AppBar from "./AppBar/AppBar";
-// import PhonebookView from "../views/PhonebookView/PhonebookView";
-// import HomeView from "../views/HomeView/HomeView";
-// import RegisterView from "../views/RegisterView/RegisterView";
-// import LoginView from "../views/LoginView/LoginView";
+import AppBar from "./AppBar";
 import Container from "./Container/Container";
 import { fetchCurrentUser } from "../redux/auth/auth-operations";
 import { getIsFetchingCurrent } from "../redux/auth/auth-selectors";
@@ -14,20 +10,16 @@ import PrivateRoute from "./PrivateRoute";
 import Spinner from "./Loader";
 
 const HomeView = lazy(() =>
-  import("../views/HomeView/HomeView" /*webpackChunkName: "home-view" */)
+  import("../views/HomeView" /*webpackChunkName: "home-view" */)
 );
 const RegisterView = lazy(() =>
-  import(
-    "../views/RegisterView/RegisterView" /*webpackChunkName: "register-view" */
-  )
+  import("../views/RegisterView" /*webpackChunkName: "register-view" */)
 );
 const LoginView = lazy(() =>
-  import("../views/LoginView/LoginView" /*webpackChunkName: "login-view" */)
+  import("../views/LoginView" /*webpackChunkName: "login-view" */)
 );
 const PhonebookView = lazy(() =>
-  import(
-    "../views/PhonebookView/PhonebookView" /*webpackChunkName: "phonebook-view" */
-  )
+  import("../views/PhonebookView" /*webpackChunkName: "phonebook-view" */)
 );
 
 function App() {
